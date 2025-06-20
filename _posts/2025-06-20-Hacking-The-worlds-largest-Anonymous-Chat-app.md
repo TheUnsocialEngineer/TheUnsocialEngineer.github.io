@@ -13,6 +13,7 @@ It all started when I was bored one day so decided to start browsing the network
 Curious to see how it worked I opened the URL in a new tab expecting an error however instead the feed of messages appeared, did the "worlds largest anonymous chat app" really leave their direct chat feed public and unauthenticated? To test further I opened the same URL in an incognito window and once again the messages appeared, it seems like it really was just open to the internet. Accessing the URL once only provided new messages in the current chat pool however refreshing would update to show all new messages in real time, accessing the URL later would have the full list of current messages., I had just discovered Antiland's backend chat provider.
 
 ![[Pasted image 20250330095215.png]]
+<link rel="icon" type="image/png"  href="/assets/img/antiland/Pubnubfeed.png">
 PubNub chat feed
 
 Curious about the potential of this I started developing a basic chat logger that would take a chats ID and refresh the PubNub URL every second and log every message that came through. During the development of this POC I realised I could use this same system to create bots in a similar way to Discord and so the Antiland Bot project was born
