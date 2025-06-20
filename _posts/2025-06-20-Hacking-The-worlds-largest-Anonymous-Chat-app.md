@@ -4,13 +4,13 @@ author: Eoka
 ---
 
 
-"Anonymous"
+Antiland Is an "Anonymous Chat Rooms, Dating roleplay game" Chat app with both web ansd Android applications (Apple removed from appstore) with an estimated 40 million users.They claim that despite the app being anonymous and having many filters to enforce that"The point of this app is to have fun, meet new people, and make friends. You can also use this app for dating purposes and find a spouse as well!". I had actually used the app for about a year before i started to uncover the darker side of the app and the issues that it would cause.
 
 
-It all started when I was browsing the network traffic of the apps web version when I noticed some calls to heartbeat URLs like   
-[https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335](https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335) wanting to see what they were I looked at the response tab in the network traffic and to my surprise it contained a feed of all the chat messages in JSON as they were sent by users.
+It all started when I was bored one day so decided to start browsing the network traffic of the apps web version when I noticed some calls to heartbeat URLs like   
+[https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335](https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335). Wanting to see what they were I looked at the response tab in the network traffic and to my surprise it contained a feed of all the chat messages in JSON as they were sent by users.
 
-Curious to see how it worked I opened the URL in a new tab expecting an error however instead the feed of messages appeared, did the worlds largest anonymous chat app really leave their direct chat feed public and unauthenticated? To test further I opened the same URL in an incognito window and once again the messages appeared, it seems like it really was just open to the internet. Accessing the URL once only provided new messages in the current chat pool however refreshing would update to show all new messages in real time, accessing the URL later would have the full list of current messages., I had just discovered Antiland's backend chat provider.
+Curious to see how it worked I opened the URL in a new tab expecting an error however instead the feed of messages appeared, did the "worlds largest anonymous chat app" really leave their direct chat feed public and unauthenticated? To test further I opened the same URL in an incognito window and once again the messages appeared, it seems like it really was just open to the internet. Accessing the URL once only provided new messages in the current chat pool however refreshing would update to show all new messages in real time, accessing the URL later would have the full list of current messages., I had just discovered Antiland's backend chat provider.
 
 ![[Pasted image 20250330095215.png]]
 PubNub chat feed
