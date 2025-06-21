@@ -12,7 +12,7 @@ It all started when I was bored one day so decided to start browsing the network
 
 Curious to see how it worked I opened the URL in a new tab expecting an error however instead the feed of messages appeared, did the "worlds largest anonymous chat app" really leave their direct chat feed public and unauthenticated? To test further I opened the same URL in an incognito window and once again the messages appeared, it seems like it really was just open to the internet. Accessing the URL once only provided new messages in the current chat pool however refreshing would update to show all new messages in real time, accessing the URL later would have the full list of current messages., I had just discovered Antiland's backend chat provider.
 
-<img src="/assets/img/antiland/pubnubfeed.png">
+<img src="/assets/img/antiland/pubnubfeed.png" alt="PubNub chat feed">
 *PubNub chat feed*
 
 Curious about the potential of this I started developing a basic chat logger that would take a chats ID and refresh the PubNub URL every second and log every message that came through. During the development of this POC I realised I could use this same system to create bots in a similar way to Discord and so the Antiland Bot project was born
@@ -24,16 +24,16 @@ I Created a python library called [Antiland](https://github.com/TheUnsocialEngin
 
 The web version of Antiland uses a Main.js file located [here](https://www.antiland.com/chat/main.66a3d4583495b4ed.js) which contains all the API routes for things like sending messages, creating groups and other app functions, This was perfect for documenting and developing the API for my bots however as I scrolled through the list of functions I started to notice some that could be abused for malicious intent. each function in the JS file would contain the route of the API path and any parameters that route needed to function correctly which made it extremely simple to identify any URLs with misuse potential
 
-<img src="/assets/img/antiland/apiroutes.png">
+<img src="/assets/img/antiland/apiroutes.png" alt="example of functions in the Main.js file">
 *example of functions in the Main.js file*
 
 I was able to identify 5 API routes that had the potential to be misused and leak user data
 
 Firstly there is **/functions/v2:profile.confirmEmail** , **/functions/v2:profile.resendEmailVerification** and **/functions/v2:profile.resetPassword** which take either an email address and phone number as parameters.
 
-<img src="/assets/img/antiland/confirmemail.png">
-<img src="/assets/img/antiland/emailverification.png">
-<img src="/assets/img/antiland/resetpassword.png">
+<img src="/assets/img/antiland/confirmemail.png" alt="email confirmation route">
+<img src="/assets/img/antiland/emailverification.png" alt="email verification route">
+<img src="/assets/img/antiland/resetpassword.png" alt="reset password route">
 *confirm email, verify email and password reset routes*
 
 At a first glance these don't seem that important however the reset password endpoint is unauthenticated and both endpoints have no rate limits. Since both the endpoints send a message to either an email or phone number this means that a bad actor could spam the endpoints with requests leading to these getting flooded with messages  (the requests do require specific app headers to work). It is worth noting that the confirm email does require a user token however this is easy to obtain however spamming the endpoint would likely result in the account being terminated. These endpoints are low severity by themselves as you need to know an email or phone number registered on Antiland however this is also way easier to pull off than it should be
@@ -44,26 +44,26 @@ There are multiple ways to identify if an email or phone number exist on the Ant
 
 Firstly there is the aptly named **/functions/v2:profile.validateEmail** which as its name suggests takes and email and will return True if the email is registered on the platform. Once again this is unauthenticated as like with before the request does require a specific app header in my case **x-parse-application-id:fUEmHsDqbr9v73s4JBx0CwANjDJjoMcDFlrGqgY5** and version string URL parameter **version=web/chat/2.0** to work. This endpoint has 0 rate limits meaning any bad actor with a list of emails can check it against the platform.... what kind of crack did these developers  smoke and where can I get some.
 
-<img src="/assets/img/antiland/validateemail.png">
+<img src="/assets/img/antiland/validateemail.png" alt="email validation in the main.js">
 *email validation in the main.js*
 
-<img src="/assets/img/antiland/validresult.png">
+<img src="/assets/img/antiland/validresult.png" alt="email validation response for valid email">
 *email validation response for valid email*
 
 As if this wasn't bad enough there is also the **/functions/v2:profile.getUsernameByPhone** which is similar to the route above however  **IT RETURNS THE USERNAME ASSOCIATED WITH THE PHONE, WHY IS THIS A THING, JUST WHY**
 
-<img src="/assets/img/antiland/usernamebyphone.png">
+<img src="/assets/img/antiland/usernamebyphone.png" alt="route to fetch username via phone number">
 *route to fetch username via phone number*
 
 Again due to lack of proper authentication and rate limits this can be abused by spamming the endpoint with a list of phone numbers and not only will it validate if a phone number exists on the platform it will return the username of the account the phone number is linked to, how secure.
 
-<img src="/assets/img/antiland/anarchy.png">
+<img src="/assets/img/antiland/anarchy.png" alt="Response if phone is registered">
 *Response if phone is registered*
 
 Using a python script I am able to run phone numbers through the API and retrieve the usernames of any accounts registered, this by itself is already quite concerning however when using phone numbers gathered from various data breaches a bad actor is then able to unmask the real life identities of the accounts on the platform leading to further exploitation, extortion and blackmail schemes if they wished. (Note: this returns the username not the display name which does add another layer)
 this issue is the same that arises when mass looking up emails using the email validation APIs, while they do not expose the username like when using phone numbers it is still allowing bad actors to identify people who are registered on the Antiland platform and their real life identities.
 
-<img src="/assets/img/antiland/phonelookup.png">
+<img src="/assets/img/antiland/phonelookup.png" alt="script running a phone lookup">
 *script running a phone lookup*
 
 
@@ -74,18 +74,18 @@ Another issue I uncovered during all of this was the developers lack of ability 
 
 This data  was clearly removed as creation dates and blocked by data are not supposed to be public on the platform to help with the anonymity (I'm pretty sure the v2 API was developed to directly counter features of the bot library) however what the developers failed to do was disable the old API backend meaning even though the routes are no longer in the main.js they are still available through GitHub, the WayBack machine and any other archives of the site. while this is not a glaring security issue it does raise the question of what other deprecated, outdated and potentially unsecure features still exist on the app but are just being hidden from the user.
 
-<img src="/assets/img/antiland/v1contactspayload.png">
+<img src="/assets/img/antiland/v1contactspayload.png" alt="example of the V1 API route payload for getting contacts">
 *example of the V1 API route payload for getting contacts*
 
-<img src="/assets/img/antiland/v2contacts.png">
+<img src="/assets/img/antiland/v2contacts.png" alt="the new V2 api in the main.js">
 *the new V2 api in the main.js*
 
-<img src="/assets/img/antiland/v2contactsresponse.png">
+<img src="/assets/img/antiland/v2contactsresponse.png" alt="v2 api response for getting friends.">
 *v2 api response for getting friends.*
 
 As you can see from the below screenshot I am still able to use send requests to this legacy API and retrieve the data that the V2 would not give to me which includes the Users creation and last profile update dates and times and the full list of UUIDs of users that have them blocked.
 
-<img src="/assets/img/antiland/v1reqbin.png">
+<img src="/assets/img/antiland/v1reqbin.png" alt="V1 api request and response via REQBIN">
 *V1 api request and response via REQBIN*
 
 At the time of writing this (12/05/ 25) In true Antiland fashion by researching these issues I have discovered yet another flaw in the V1 contacts API, while looking through the reqbin response I noticed a response returned some usernames of the blocked users and not the UUID which it normally would, this is again a flaw that can be used to unmask user identities as the usernames of accounts (which is what the Phone verifier returns) are not public on the site and are normally not the same as a users display name, while this only seems to happen in small numbers across a large sample this would likely be higher.
