@@ -6,6 +6,10 @@ author: Eoka
 ## About
 Antiland Is an "Anonymous Chat Rooms, Dating roleplay game" Chat app with both web ansd Android applications (Apple removed from appstore) with an estimated 40 million users.   They claim that despite the app being anonymous and having many filters to enforce that "The point of this app is to have fun, meet new people, and make friends. You can also use this app for dating purposes and find a spouse as well!". I had actually used the app for about a year before I started to uncover the darker side of the app and the issues that it would cause.
 
+## Disclosure
+Since this started a year ago hese Issues and vulnerabilities have been raised multiple time to the antiland time with the most recent being on 28/03/35 and as of 21/06/25 there has still been no attempts to adress any of the issues and concerns raised. This demonstrates a major jack of concern regarding the safety and security of their platform and its users. due the time elapsed since last disclosure and the severity of of the issues i have decided to release a writeup explaining what i have found and why it is significant.
+
+## Beginning
 
 It all started when I was bored one day so decided to start browsing the network traffic of the apps web version when I noticed some calls to heartbeat URLs like   
 [https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335](https://ps.pndsn.com/v2/subscribe/sub-c-24884386-3cf2-11e5-8d55-0619f8945a4f/nbaUk2wskP/0?heartbeat=300&tt=17433233931111506&tr=42&uuid=mV1UqOtkyL&pnsdk=PubNub-JS-Web%2F7.4.5&l_pres=335). Wanting to see what they were I looked at the response tab in the network traffic and to my surprise it contained a feed of all the chat messages in JSON as they were sent by users.
