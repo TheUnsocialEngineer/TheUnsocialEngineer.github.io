@@ -615,6 +615,7 @@ The first account he created was a Gmail as this would be what is used to create
 
 As I did not have the details needed to verify the account and due to the fact we didnt want these to actually be used to target victims we pulled the plug disabled all the accounts and cut off his access to the machine. By this time lucas had actually paid out $20 worth of crypto which not only was a nice treat but let us see some of the crypto traffic however that quickly fell apart as it branched in and out too much.
 
+## IOC
 
 Ip Addresses
 * 86[.]104[.]74[.]51
