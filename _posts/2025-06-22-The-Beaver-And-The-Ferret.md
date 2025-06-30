@@ -3,7 +3,10 @@ layout: post
 Author: Eoka
 ---
 
-Before we get into the meat and potatoes of this interesting case I have to thank all the people involved who helped with the analysis of this campaign <insert list here>
+Before we get into the meat and potatoes of this interesting case I have to thank all the people involved who helped with the analysis of this campaign 
+* Suppito
+* Jakob
+* Bakeneko
 
 ## The Beginning
 
