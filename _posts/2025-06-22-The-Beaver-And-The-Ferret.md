@@ -615,6 +615,9 @@ The first account he created was a Gmail as this would be what is used to create
 
 As I did not have the details needed to verify the account and due to the fact we didnt want these to actually be used to target victims we pulled the plug disabled all the accounts and cut off his access to the machine. By this time lucas had actually paid out $20 worth of crypto which not only was a nice treat but let us see some of the crypto traffic however that quickly fell apart as it branched in and out too much.
 
+<img src="/assets/img/beaver/transaction.png" alt="Crypto Tranfer from Lucas">
+*Crypto Tranfer from Lucas*
+
 ## Conclusion
 
 Based on our research it is clear to say that DPRK hackers are not slowing down on their campains as they are still very actively and persistantly trying to persuade US citizens to unwillingly help them compromise and exfiltrate money back to the home state, The tactics used here show how much access they are trying to get via crypto jacking, and info stealing which would let them gain access to high level systems at the targeted organisations, exfiltrate data and carry put further attacks, The use of US citizens to gain these fake jobs highlights the fact that companies need to strengthen their policies as to them this would just look like a legitimate US citzen as the North Koran would use them, their ID, names and even voices on interviews to help pass any checks and erase suspicion. The North Korean campaigns will not stop any time soon and its up to us to help identify and slow them down as well as educate people on the signs that they might be falling victim to one of these fake githuib repos or job offers.
